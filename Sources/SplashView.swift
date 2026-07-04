@@ -33,7 +33,7 @@ struct SplashView: View {
                 Spacer()
 
                 // 底部品牌标识
-                Text("LifeChronicle")
+                Text("Ricky")
                     .font(.system(size: 13, design: .serif))
                     .foregroundColor(.white.opacity(0.4))
                     .tracking(2)

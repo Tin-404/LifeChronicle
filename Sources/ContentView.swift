@@ -16,7 +16,7 @@ struct ContentView: View {
                 VStack(spacing: 0) {
                     // MARK: Header — centred brand mark
                     VStack(spacing: 4) {
-                        Text("LifeChronicle")
+                        Text("Ricky")
                             .font(.system(.largeTitle, design: .serif))
                             .fontWeight(.bold)
                             .foregroundColor(DesignSystem.accent)

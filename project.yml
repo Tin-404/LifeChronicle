@@ -29,9 +29,9 @@ targets:
       base:
         GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.lifechronicle.app
-        INFOPLIST_KEY_CFBundleDisplayName: LifeChronicle
-        INFOPLIST_KEY_CFBundleName: LifeChronicle
+        INFOPLIST_KEY_CFBundleDisplayName: Ricky
+        INFOPLIST_KEY_CFBundleName: Ricky
         INFOPLIST_KEY_CFBundleShortVersionString: "1.0"
         INFOPLIST_KEY_CFBundleVersion: "1"
         # Privacy — Photo Library (PhotosPicker 本身无需权限，但为 App Store 合规添加)
-        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "LifeChronicle 需要访问您的相册，用于创建照片记录和胶卷。"
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Ricky 需要访问您的相册，用于创建照片记录和胶卷。"
