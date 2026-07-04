@@ -8,7 +8,7 @@ struct DiaryListView: View {
         let diaryRecords = recordStore.records(of: .diary)
 
         ZStack {
-            OldMoneyBackground()
+            MistBlueBackground()
 
             if diaryRecords.isEmpty {
                 EmptyArchiveView(icon: "book.closed", title: "No entries yet")

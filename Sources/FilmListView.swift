@@ -18,7 +18,7 @@ struct FilmListView: View {
 
     var body: some View {
         ZStack {
-            OldMoneyBackground()
+            MistBlueBackground()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
@@ -114,9 +114,9 @@ struct FilmArchiveCell: View {
                     .stroke(DesignSystem.cardBackground, lineWidth: 3)
             )
 
-            // 2pt gold horizontal line, 20pt wide, centred — mood indicator
+            // 2pt sky-blue horizontal line, 20pt wide, centred — mood indicator
             Rectangle()
-                .fill(DesignSystem.gold)
+                .fill(DesignSystem.accent)
                 .frame(width: 20, height: 2)
                 .padding(.top, 10)
         }

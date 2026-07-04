@@ -11,19 +11,19 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                OldMoneyBackground()
+                MistBlueBackground()
 
                 VStack(spacing: 0) {
                     // MARK: Header — centred brand mark
                     VStack(spacing: 4) {
                         Text("Ricky")
-                            .font(.system(.largeTitle, design: .serif))
+                            .font(.system(.largeTitle, design: .rounded))
                             .fontWeight(.bold)
                             .foregroundColor(DesignSystem.accent)
-                            .tracking(2)
+                            .tracking(1)
 
                         Text("Your private archive")
-                            .font(.caption)
+                            .font(.system(.caption, design: .rounded))
                             .foregroundColor(DesignSystem.textSecondary)
                             .tracking(DesignSystem.bodyTracking)
                     }
@@ -158,31 +158,35 @@ struct GalleryEntryCard: View {
                 .frame(width: 28)
 
             // Centre: title + count subtitle
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.system(.headline, design: .serif))
+                    .font(.system(.headline, design: .rounded))
                     .foregroundColor(DesignSystem.textPrimary)
                 Text("\(count) \(unit)")
-                    .font(.caption)
+                    .font(.system(.caption, design: .rounded))
                     .foregroundColor(DesignSystem.textSecondary)
                     .tracking(DesignSystem.bodyTracking)
             }
 
             Spacer()
 
-            // Right: fine gold vertical line (1px × 28pt)
+            // Right: fine sky-blue vertical line (1px × 28pt)
             Rectangle()
-                .fill(DesignSystem.gold)
-                .frame(width: DesignSystem.goldLineWidth, height: DesignSystem.goldLineHeight)
+                .fill(DesignSystem.accent)
+                .frame(width: DesignSystem.accentLineWidth, height: DesignSystem.accentLineHeight)
         }
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity)
         .frame(height: DesignSystem.cardHeight)
-        .background(DesignSystem.cardBackground)
+        .background(
+            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
+                .fill(DesignSystem.cardBackground)
+        )
         .overlay(
-            Rectangle()
+            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
                 .stroke(DesignSystem.border, lineWidth: 1)
         )
+        .shadow(color: DesignSystem.cardShadowColor, radius: DesignSystem.cardShadowRadius, x: 0, y: DesignSystem.cardShadowY)
         .scaleEffect(isPressed ? 0.98 : 1.0)
         .animation(DesignSystem.pressSpring, value: isPressed)
         .sensoryFeedback(.impact(weight: .light), trigger: hapticTrigger)

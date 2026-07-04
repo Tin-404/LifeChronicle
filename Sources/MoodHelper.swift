@@ -4,17 +4,18 @@ struct MoodOption: Identifiable {
     let id = UUID()
     let emoji: String
     let label: String
-    let color: Color
+    let color: Color       // pastel background
+    let textColor: Color   // dark saturated text
 }
 
-// MARK: - Mood Options (Old Money desaturated palette)
+// MARK: - Mood Options (anime pastel palette)
 
 let moodOptions: [MoodOption] = [
-    MoodOption(emoji: "😊", label: "开心", color: DesignSystem.moodHappy),
-    MoodOption(emoji: "😌", label: "平静", color: DesignSystem.moodCalm),
-    MoodOption(emoji: "😢", label: "难过", color: DesignSystem.moodSad),
-    MoodOption(emoji: "🤩", label: "兴奋", color: DesignSystem.moodExcited),
-    MoodOption(emoji: "😰", label: "焦虑", color: DesignSystem.moodAnxious),
+    MoodOption(emoji: "😊", label: "开心", color: DesignSystem.moodHappy, textColor: DesignSystem.moodHappyText),
+    MoodOption(emoji: "😌", label: "平静", color: DesignSystem.moodCalm, textColor: DesignSystem.moodCalmText),
+    MoodOption(emoji: "😢", label: "难过", color: DesignSystem.moodSad, textColor: DesignSystem.moodSadText),
+    MoodOption(emoji: "🤩", label: "兴奋", color: DesignSystem.moodExcited, textColor: DesignSystem.moodExcitedText),
+    MoodOption(emoji: "😰", label: "焦虑", color: DesignSystem.moodAnxious, textColor: DesignSystem.moodAnxiousText),
 ]
 
 private let moodKeywords: [String: String] = [
@@ -41,12 +42,13 @@ func recommendMood(for text: String) -> MoodOption? {
 func recommendMoodFromColor(_ image: UIImage) -> MoodOption? {
     guard let (h, s, l) = image.hslFromAverageColor() else { return nil }
 
+    // Updated HSL targets to match the new anime pastel palette
     let targets: [(emoji: String, h: CGFloat, s: CGFloat, l: CGFloat)] = [
-        ("😊", 35,  0.40, 0.83),   // warm sand #D4B895
-        ("😌", 208, 0.12, 0.54),   // grey-blue #7A8B99
-        ("😢", 218, 0.10, 0.65),   // cool grey #9CA3AF
-        ("🤩", 0,   0.21, 0.45),   // deep burgundy #8B5A5A
-        ("😰", 292, 0.09, 0.68),   // misty purple #B4A7B6
+        ("😊", 48,  0.75, 0.82),   // cream yellow #FFE8A1
+        ("😌", 185, 0.50, 0.80),   // mint blue #B3E0E5
+        ("😢", 262, 0.28, 0.84),   // misty purple #D1C4E9
+        ("🤩", 6,   0.65, 0.85),   // coral pink #FFB7B2
+        ("😰", 356, 0.55, 0.92),   // champagne pink #FADADD
     ]
 
     var bestEmoji: String? = nil
@@ -67,9 +69,16 @@ func recommendMoodFromColor(_ image: UIImage) -> MoodOption? {
     return moodOptions.first { $0.emoji == emoji }
 }
 
+/// Returns the mood's pastel background color (for lines, fills, visual indicators).
 func colorForMood(_ emoji: String?) -> Color {
     guard let emoji else { return DesignSystem.textSecondary }
     return moodOptions.first { $0.emoji == emoji }?.color ?? DesignSystem.textSecondary
+}
+
+/// Returns the mood's dark saturated text color (for labels, tags on light backgrounds).
+func textColorForMood(_ emoji: String?) -> Color {
+    guard let emoji else { return DesignSystem.textSecondary }
+    return moodOptions.first { $0.emoji == emoji }?.textColor ?? DesignSystem.textSecondary
 }
 
 // MARK: - Mood English Names
@@ -127,19 +136,19 @@ func formatDateChinese(_ date: Date) -> String {
     return "\(year)年\(month)月\(day)日 · \(period) \(timeStr)"
 }
 
-// MARK: - Mood Selector (thin-bordered capsule row)
+// MARK: - Mood Selector (soft pastel pill row)
 
 struct MoodSelector: View {
     @Binding var selectedEmoji: String?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             Text("Mood")
                 .font(.caption)
                 .foregroundColor(DesignSystem.textSecondary)
                 .tracking(DesignSystem.bodyTracking)
 
-            HStack(spacing: 8) {
+            HStack(spacing: 10) {
                 ForEach(moodOptions) { option in
                     let isSelected = selectedEmoji == option.emoji
                     let englishName = moodEnglishName(for: option.emoji)
@@ -150,16 +159,17 @@ struct MoodSelector: View {
                         }
                     } label: {
                         Text(englishName)
-                            .font(.system(.caption, design: .serif))
-                            .foregroundColor(isSelected ? .white : DesignSystem.textSecondary)
+                            .font(.system(.caption, design: .rounded))
+                            .fontWeight(isSelected ? .medium : .regular)
+                            .foregroundColor(isSelected ? option.textColor : DesignSystem.textSecondary)
                             .padding(.horizontal, 14)
-                            .padding(.vertical, 7)
+                            .padding(.vertical, 8)
                             .background(
-                                Capsule()
-                                    .fill(isSelected ? option.color : Color.white)
+                                RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
+                                    .fill(isSelected ? option.color.opacity(0.6) : Color.white)
                             )
                             .overlay(
-                                Capsule()
+                                RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
                                     .stroke(isSelected ? option.color : DesignSystem.border, lineWidth: 1)
                             )
                     }
@@ -188,7 +198,7 @@ struct MoodRecommendationHint: View {
             HStack(spacing: 8) {
                 Circle()
                     .fill(moodColor)
-                    .frame(width: 6, height: 6)
+                    .frame(width: 8, height: 8)
 
                 Text("Suggested: \(moodEnglishName(for: emoji))")
                     .font(.caption)
@@ -205,17 +215,17 @@ struct MoodRecommendationHint: View {
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
             .background(
-                Rectangle()
-                    .fill(DesignSystem.hintBackground.opacity(0.6))
+                RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
+                    .fill(DesignSystem.hintBackground.opacity(0.8))
             )
         }
         .buttonStyle(.plain)
     }
 }
 
-// MARK: - Empty Archive View (minimal thin-line aesthetic)
+// MARK: - Empty Archive View (soft anime-style)
 
-/// Shared empty-state component — thin-bordered square frame with SF Symbol.
+/// Shared empty-state component — soft bordered rounded square with SF Symbol.
 /// Used by Diary, Photos, and Film list views.
 struct EmptyArchiveView: View {
     let icon: String
@@ -224,17 +234,18 @@ struct EmptyArchiveView: View {
     var body: some View {
         VStack(spacing: 16) {
             ZStack {
-                Rectangle()
+                RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
                     .stroke(DesignSystem.border, lineWidth: 1)
-                    .frame(width: 72, height: 72)
+                    .frame(width: 80, height: 80)
 
                 Image(systemName: icon)
-                    .font(.system(size: 28, weight: .thin))
-                    .foregroundColor(DesignSystem.textSecondary.opacity(0.5))
+                    .font(.system(size: 30, weight: .thin))
+                    .foregroundColor(DesignSystem.textSecondary.opacity(0.4))
             }
+            .shadow(color: DesignSystem.cardShadowColor, radius: DesignSystem.cardShadowRadius, x: 0, y: DesignSystem.cardShadowY)
 
             Text(title)
-                .font(.system(.caption, design: .serif))
+                .font(.system(.caption, design: .rounded))
                 .foregroundColor(DesignSystem.textSecondary)
                 .tracking(DesignSystem.bodyTracking)
         }
@@ -245,8 +256,8 @@ struct EmptyArchiveView: View {
 
 // MARK: - Record Row (diary archive card)
 
-/// Archive-style card: no dividers, hierarchy via whitespace + 1px left mood-coloured line.
-/// Old Money restraint: generous padding, serif mood tag, deliberate press spring.
+/// Archive-style card with rounded corners, soft shadow, and 1px left mood-coloured line.
+/// Anime lightness: generous padding, rounded mood tag, deliberate press spring.
 struct RecordRowView: View {
     let record: Record
 
@@ -268,16 +279,17 @@ struct RecordRowView: View {
 
                     Spacer(minLength: 8)
 
-                    // Mood tag — lowercase English, 1px border box
+                    // Mood tag — rounded, pastel fill + dark text
                     if let mood = record.mood {
                         Text(moodEnglishName(for: mood))
-                            .font(.system(.caption, design: .serif))
-                            .foregroundColor(colorForMood(mood))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 3)
-                            .overlay(
-                                Rectangle()
-                                    .stroke(DesignSystem.border, lineWidth: 1)
+                            .font(.system(.caption, design: .rounded))
+                            .fontWeight(.medium)
+                            .foregroundColor(textColorForMood(mood))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(
+                                RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
+                                    .fill(colorForMood(mood).opacity(0.5))
                             )
                     }
                 }
@@ -290,21 +302,32 @@ struct RecordRowView: View {
                         .foregroundColor(DesignSystem.textSecondary)
                 }
             }
-            .padding(.leading, 12)
-            .padding(.trailing, 16)
+            .padding(.leading, 14)
+            .padding(.trailing, DesignSystem.screenPadding)
             .padding(.vertical, 16)
         }
         .frame(maxWidth: .infinity)
-        .background(DesignSystem.cardBackground)
+        .background(
+            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
+                .fill(DesignSystem.cardBackground)
+        )
         .overlay(
-            Rectangle()
+            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
                 .stroke(DesignSystem.border, lineWidth: 1)
         )
+        .shadow(
+            color: DesignSystem.cardShadowColor,
+            radius: DesignSystem.cardShadowRadius,
+            x: 0,
+            y: DesignSystem.cardShadowY
+        )
         .overlay(alignment: .leading) {
-            // 1px mood-coloured vertical line — full card height
-            Rectangle()
+            // 1px mood-coloured vertical line — left edge
+            RoundedRectangle(cornerRadius: 1)
                 .fill(colorForMood(record.mood))
                 .frame(width: DesignSystem.moodLineWidth)
+                .padding(.vertical, 12)
+                .padding(.leading, 0)
         }
         .scaleEffect(isPressed ? 0.98 : 1.0)
         .animation(DesignSystem.pressSpring, value: isPressed)

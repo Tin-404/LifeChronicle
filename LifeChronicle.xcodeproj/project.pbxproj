@@ -17,13 +17,13 @@
 		71EFB680C0CBA1B357286B7E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2836AFB54059F67CD58A160B /* SettingsView.swift */; };
 		8F1C026773AC2B01B2FE77C8 /* CreatePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3475900FEB1941722C8E02 /* CreatePhotoView.swift */; };
 		A9FE17E6C6D7B43EFD49D506 /* FilmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A5C35F8CD2592DD86797C9 /* FilmDetailView.swift */; };
+		AA000000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000002 /* Assets.xcassets */; };
 		AB18E7C2F0CB59080002B3F1 /* UIImage+AverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2654CE444F488E5E190AB3A0 /* UIImage+AverageColor.swift */; };
 		DACF500D001A054E2B2DFDEC /* LifeChronicleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECA8D7B0EEE38923A338E54 /* LifeChronicleApp.swift */; };
 		E19C7FC6227C9C408187CABA /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FD6F7B33BBE4AFBDE35A1 /* PhotoListView.swift */; };
 		E2A53461697A1DCD014738EA /* MoodHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD001E007CD818AB08398C /* MoodHelper.swift */; };
 		E916E99C5E61EAB4A8F2B706 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461CF21FCC1916603695A4C1 /* DesignSystem.swift */; };
 		FB857957F6B866992256E3F3 /* CreateDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217A24F69ABE058CB60E2CD1 /* CreateDiaryView.swift */; };
-		AA000000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000002 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,15 +36,15 @@
 		3D03A7DF69E110D7422EE1B2 /* FilmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmListView.swift; sourceTree = "<group>"; };
 		461CF21FCC1916603695A4C1 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		51A5C35F8CD2592DD86797C9 /* FilmDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailView.swift; sourceTree = "<group>"; };
-		619F6873459F52D291813123 /* LifeChronicle.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LifeChronicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		619F6873459F52D291813123 /* LifeChronicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeChronicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		787B8AC3FEC77643238B2DA3 /* CreateFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFilmView.swift; sourceTree = "<group>"; };
 		7C3475900FEB1941722C8E02 /* CreatePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhotoView.swift; sourceTree = "<group>"; };
 		8EDD001E007CD818AB08398C /* MoodHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHelper.swift; sourceTree = "<group>"; };
+		AA000000000000000000000002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE7067DB1EC8E3DAEDE3F8B9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BECA8D7B0EEE38923A338E54 /* LifeChronicleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeChronicleApp.swift; sourceTree = "<group>"; };
 		CBDC09856DC26936953D5C2E /* DiaryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListView.swift; sourceTree = "<group>"; };
 		E5FCC9D93C03D28622FAF310 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
-		AA000000000000000000000002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -71,14 +71,6 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		AA000000000000000000000001 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				AA000000000000000000000002 /* Assets.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		8D0C3EF622DB1CC4B1066338 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +86,14 @@
 				619F6873459F52D291813123 /* LifeChronicle.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000000001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000000002 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +125,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = C44AB7A2893FB93B4E02BAC7 /* Build configuration list for PBXProject "LifeChronicle" */;
 			developmentRegion = en;
@@ -146,6 +144,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA000000000000000000000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000000000000000000000003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7BF13AA6AA925EACC26C011A /* Sources */ = {
@@ -172,17 +181,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXResourcesBuildPhase section */
-		AA000000000000000000000004 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA000000000000000000000003 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		0BC87450D1C2DEB7354C65BC /* Debug */ = {
@@ -321,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 576AL2MT92;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Ricky;
 				INFOPLIST_KEY_CFBundleName = Ricky;
@@ -332,7 +331,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lifechronicle.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tin404.ricky;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -343,6 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 576AL2MT92;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Ricky;
 				INFOPLIST_KEY_CFBundleName = Ricky;
@@ -354,7 +354,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lifechronicle.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tin404.ricky;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

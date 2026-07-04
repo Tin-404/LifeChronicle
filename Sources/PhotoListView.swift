@@ -8,7 +8,7 @@ struct PhotoListView: View {
         let photoRecords = recordStore.records(of: .photo)
 
         ZStack {
-            OldMoneyBackground()
+            MistBlueBackground()
 
             if photoRecords.isEmpty {
                 EmptyArchiveView(icon: "photo.on.rectangle.angled", title: "No photos yet")
@@ -96,16 +96,17 @@ struct PhotoRowView: View {
 
                         Spacer(minLength: 8)
 
-                        // Mood tag — serif, 1px border
+                        // Mood tag — rounded, pastel fill + dark text
                         if let mood = record.mood {
                             Text(moodEnglishName(for: mood))
-                                .font(.system(.caption, design: .serif))
-                                .foregroundColor(colorForMood(mood))
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 3)
-                                .overlay(
-                                    Rectangle()
-                                        .stroke(DesignSystem.border, lineWidth: 1)
+                                .font(.system(.caption, design: .rounded))
+                                .fontWeight(.medium)
+                                .foregroundColor(textColorForMood(mood))
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 4)
+                                .background(
+                                    RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
+                                        .fill(colorForMood(mood).opacity(0.5))
                                 )
                         }
                     }
@@ -124,16 +125,21 @@ struct PhotoRowView: View {
             .padding(.vertical, 16)
         }
         .frame(maxWidth: .infinity)
-        .background(DesignSystem.cardBackground)
+        .background(
+            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
+                .fill(DesignSystem.cardBackground)
+        )
         .overlay(
-            Rectangle()
+            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
                 .stroke(DesignSystem.border, lineWidth: 1)
         )
+        .shadow(color: DesignSystem.cardShadowColor, radius: DesignSystem.cardShadowRadius, x: 0, y: DesignSystem.cardShadowY)
         .overlay(alignment: .leading) {
-            // 1px mood-coloured vertical line — full card height
-            Rectangle()
+            // 1px mood-coloured vertical line
+            RoundedRectangle(cornerRadius: 1)
                 .fill(colorForMood(record.mood))
                 .frame(width: DesignSystem.moodLineWidth)
+                .padding(.vertical, 12)
         }
         .scaleEffect(isPressed ? 0.98 : 1.0)
         .animation(DesignSystem.pressSpring, value: isPressed)

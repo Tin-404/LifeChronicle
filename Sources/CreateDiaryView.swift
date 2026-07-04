@@ -20,7 +20,7 @@ struct CreateDiaryView: View {
 
     var body: some View {
         ZStack {
-            OldMoneyBackground()
+            MistBlueBackground()
 
             VStack(spacing: 0) {
                 ScrollView {
@@ -95,20 +95,20 @@ struct CreateDiaryView: View {
                                 .transition(.scale.combined(with: .opacity))
                         } else {
                             Text("SAVE")
-                                .font(.system(size: 15, weight: .semibold, design: .serif))
+                                .font(.system(size: 15, weight: .semibold, design: .rounded))
                                 .foregroundColor(isPressed ? DesignSystem.accent : .white)
-                                .tracking(4)
+                                .tracking(3)
                         }
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height: DesignSystem.buttonHeight)
                     .background(
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusButton)
                             .fill(isPressed ? Color.white : DesignSystem.accent)
                     )
                     .overlay(
-                        Rectangle()
-                            .stroke(showGoldBorder ? DesignSystem.gold : DesignSystem.accent,
+                        RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusButton)
+                            .stroke(showGoldBorder ? DesignSystem.accent.opacity(0.6) : DesignSystem.accent,
                                     lineWidth: showGoldBorder ? 2 : 1)
                     )
                 }

@@ -40,13 +40,13 @@ struct FilmDetailView: View {
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .animation(.easeInOut(duration: 0.3), value: currentPage)
 
-                    // Custom gold page indicator dots
+                    // Custom sky-blue page indicator dots
                     HStack(spacing: 6) {
                         ForEach(imagePaths.indices, id: \.self) { index in
                             Circle()
                                 .fill(currentPage == index
-                                    ? DesignSystem.gold
-                                    : DesignSystem.gold.opacity(0.25))
+                                    ? DesignSystem.accent
+                                    : DesignSystem.accent.opacity(0.25))
                                 .frame(width: 6, height: 6)
                         }
                     }

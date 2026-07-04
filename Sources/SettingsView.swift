@@ -9,7 +9,7 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            OldMoneyBackground()
+            MistBlueBackground()
 
             ScrollView {
                 VStack(spacing: DesignSystem.spacing) {
@@ -74,11 +74,15 @@ struct SettingsView: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    .background(DesignSystem.cardBackground)
+                    .background(
+                        RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
+                            .fill(DesignSystem.cardBackground)
+                    )
                     .overlay(
-                        Rectangle()
+                        RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusLarge)
                             .stroke(DesignSystem.border, lineWidth: 1)
                     )
+                    .shadow(color: DesignSystem.cardShadowColor, radius: DesignSystem.cardShadowRadius, x: 0, y: DesignSystem.cardShadowY)
                     .padding(.horizontal, DesignSystem.screenPadding)
                 }
                 .padding(.top, 16)
@@ -107,18 +111,21 @@ private struct EditSplashView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                OldMoneyBackground()
+                MistBlueBackground()
 
                 VStack(spacing: 20) {
                     // Text field — Old Money editor style
                     TextField("Enter splash text", text: $localText)
-                        .font(.system(size: 18, weight: .medium, design: .serif))
+                        .font(.system(size: 18, weight: .medium, design: .rounded))
                         .foregroundColor(DesignSystem.textPrimary)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 14)
-                        .background(DesignSystem.editorBackground)
+                        .background(
+                            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
+                                .fill(DesignSystem.editorBackground)
+                        )
                         .overlay(
-                            Rectangle()
+                            RoundedRectangle(cornerRadius: DesignSystem.cornerRadiusSmall)
                                 .stroke(isFocused ? DesignSystem.borderFocused : DesignSystem.border, lineWidth: 1)
                         )
                         .focused($isFocused)
